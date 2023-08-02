@@ -30,7 +30,7 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
     """
 
     def __init__(self, *args, **kwds) -> None:
-        super().__init__(args, kwds)
+        super().__init__(*args, **kwds)
         self._logger = get_logger("middleware.request_id")
 
     async def dispatch(
@@ -64,7 +64,7 @@ class RequestLoggerMiddleware(BaseHTTPMiddleware):
     """
 
     def __init__(self, *args, **kwds) -> None:
-        super().__init__(args, kwds)
+        super().__init__(*args, **kwds)
         self._logger = get_logger("middleware.request_logger")
 
     def _extract_request_metadata(self, request: Request) -> Dict:
