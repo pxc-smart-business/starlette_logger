@@ -8,6 +8,10 @@ authors = [{name = "Proficloud.io", email = "inbox@phoenixcontact-sb.io"}]
 readme = "README.md"
 requires-python = ">=3.10"
 dynamic = ["version", "description"]
+dependencies = [
+  "starlette >=0.31.0",
+  "structlog >=23.1.0"
+]
 
 [project.urls]
 Home = "https://proficloud.io"
