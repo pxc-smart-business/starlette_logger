@@ -5,7 +5,6 @@ from typing import Dict
 from starlette.datastructures import MutableHeaders
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
-from structlog import get_logger
 from structlog.contextvars import bind_contextvars, clear_contextvars, get_contextvars
 
 
@@ -31,8 +30,9 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
     """
 
     def __init__(self, *args, **kwds) -> None:
+        self._logger = kwds["logger"]
+        del kwds["logger"]
         super().__init__(*args, **kwds)
-        self._logger = get_logger("middleware.request_id")
 
     async def dispatch(
         self, request: Request, call_next: RequestResponseEndpoint
@@ -70,8 +70,9 @@ class RequestLoggerMiddleware(BaseHTTPMiddleware):
     """
 
     def __init__(self, *args, **kwds) -> None:
+        self._logger = kwds["logger"]
+        del kwds["logger"]
         super().__init__(*args, **kwds)
-        self._logger = get_logger("middleware.request_logger")
 
     def _extract_request_metadata(self, request: Request) -> Dict:
         return {
